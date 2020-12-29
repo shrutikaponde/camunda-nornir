@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1cbqqht" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:process id="Audit_001" name="Audit 001" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0630k0m</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0630k0m" sourceRef="StartEvent_1" targetRef="Activity_0avicds" />
+    <bpmn:task id="Activity_13dmthr" name="Record results">
+      <bpmn:incoming>Flow_1ldc0x8</bpmn:incoming>
+      <bpmn:outgoing>Flow_006w54w</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Event_0bzapzc">
+      <bpmn:incoming>Flow_006w54w</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_006w54w" sourceRef="Activity_13dmthr" targetRef="Event_0bzapzc" />
+    <bpmn:userTask id="Activity_0avicds" name="Configure Audit Details">
+      <bpmn:incoming>Flow_0630k0m</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ho39xl</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0ho39xl" sourceRef="Activity_0avicds" targetRef="Activity_0665td7" />
+    <bpmn:sequenceFlow id="Flow_1ldc0x8" sourceRef="Activity_0665td7" targetRef="Activity_13dmthr" />
+    <bpmn:callActivity id="Activity_0665td7" name="Check device connectivity test" calledElement="CheckConnectivityIOS">
+      <bpmn:extensionElements>
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ho39xl</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ldc0x8</bpmn:outgoing>
+    </bpmn:callActivity>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Audit_001">
+      <bpmndi:BPMNEdge id="Flow_0630k0m_di" bpmnElement="Flow_0630k0m">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_006w54w_di" bpmnElement="Flow_006w54w">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="752" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ho39xl_di" bpmnElement="Flow_0ho39xl">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ldc0x8_di" bpmnElement="Flow_1ldc0x8">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03zxun6_di" bpmnElement="Activity_0avicds">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13dmthr_di" bpmnElement="Activity_13dmthr">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0bzapzc_di" bpmnElement="Event_0bzapzc">
+        <dc:Bounds x="752" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1g3gbaq_di" bpmnElement="Activity_0665td7">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
