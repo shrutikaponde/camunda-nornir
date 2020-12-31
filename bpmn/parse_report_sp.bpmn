@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0ko807d" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:process id="parse_report_process" name="Parse Report Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1pxivka</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1pxivka" sourceRef="StartEvent_1" targetRef="parse_report_activity" />
+    <bpmn:endEvent id="Event_1czg5pn">
+      <bpmn:incoming>Flow_0kzdro9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0kzdro9" sourceRef="parse_report_activity" targetRef="Event_1czg5pn" />
+    <bpmn:serviceTask id="parse_report_activity" name="Parse Report">
+      <bpmn:incoming>Flow_1pxivka</bpmn:incoming>
+      <bpmn:outgoing>Flow_0kzdro9</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="parse_report_process">
+      <bpmndi:BPMNEdge id="Flow_1pxivka_di" bpmnElement="Flow_1pxivka">
+        <di:waypoint x="215" y="97" />
+        <di:waypoint x="310" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kzdro9_di" bpmnElement="Flow_0kzdro9">
+        <di:waypoint x="410" y="97" />
+        <di:waypoint x="512" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="79" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1czg5pn_di" bpmnElement="Event_1czg5pn">
+        <dc:Bounds x="512" y="79" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_19gfj3n_di" bpmnElement="parse_report_activity">
+        <dc:Bounds x="310" y="57" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dmn_configured_interfaces" name="Check configured interfaces" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <decision id="Decision_1l9hld1" name="Check Configured interfaces">
+    <decisionTable id="DecisionTable_0qkfc4y">
+      <input id="Input_1" label="interface_ip" camunda:inputVariable="interface">
+        <inputExpression id="InputExpression_1" typeRef="string" expressionLanguage="feel">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="is_assigned" typeRef="boolean" />
+      <rule id="DecisionRule_193tv03">
+        <inputEntry id="UnaryTests_0w7hxzm">
+          <text>"unassigned"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1anp602">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0b9rpcm">
+        <inputEntry id="UnaryTests_1alho5e">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04j4vgb">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1l9hld1">
+        <dc:Bounds height="80" width="180" x="160" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

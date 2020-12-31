@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0pfhbgb" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:process id="check_configured_interfaces" name="Check configured interfaces" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1jq668n</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1jq668n" sourceRef="StartEvent_1" targetRef="Activity_1r9z5ny" />
+    <bpmn:businessRuleTask id="Activity_1r9z5ny" name="Decide is interface configured" camunda:decisionRef="Decision_1l9hld1">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="interface">192.168.1.1</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1jq668n</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gqnx0a</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:endEvent id="Event_01yohh0">
+      <bpmn:incoming>Flow_0gqnx0a</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0gqnx0a" sourceRef="Activity_1r9z5ny" targetRef="Event_01yohh0" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="check_configured_interfaces">
+      <bpmndi:BPMNEdge id="Flow_1jq668n_di" bpmnElement="Flow_1jq668n">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="243" y="117" />
+        <di:waypoint x="243" y="119" />
+        <di:waypoint x="270" y="119" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gqnx0a_di" bpmnElement="Flow_0gqnx0a">
+        <di:waypoint x="370" y="119" />
+        <di:waypoint x="396" y="119" />
+        <di:waypoint x="396" y="117" />
+        <di:waypoint x="422" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01yohh0_di" bpmnElement="Event_01yohh0">
+        <dc:Bounds x="422" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0gr3xe4_di" bpmnElement="Activity_1r9z5ny">
+        <dc:Bounds x="270" y="79" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

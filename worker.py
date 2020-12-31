@@ -96,6 +96,7 @@ class Worker:
 
             for task in tasks:
                 try:
+                    # print(self.topic_funcs)
                     return_variables = self.topic_funcs[task.topic_name](**task.variables)
                 except ExternalTaskException as exc:
                     self.handle_failure.id_ = task.id_
