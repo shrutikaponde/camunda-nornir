@@ -17,7 +17,5 @@ def run_napalm_cli(config_path: pycamunda.variable.Variable, commands: pycamunda
 
     return {'result': { 
             'status': 'SUCCESS',
-            'output': {
-                'nested' : 'This will contain output of commands result.'
-                }
+            'interface':  '192.168.1.1'
             }}
