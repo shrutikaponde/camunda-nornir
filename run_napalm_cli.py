@@ -11,14 +11,21 @@ import typing
 import pycamunda.variable
 import worker
 import json
+import javaobj
+import base64
 
 def run_napalm_cli(config_path: pycamunda.variable.Variable, commands: pycamunda.variable.Variable) -> typing.Dict[str, str]:
     try:
         print('Config file path')
         nr = InitNornir(config_file=config_path.value)
 
-        print('run commands')
-        result = nr.run(napalm_cli, commands=["show version", "show ip int br", "show ip route"])
+
+        b = base64.b64decode(commands.value)
+        deserialized_cmds = javaobj.loads(b)
+        cmds = [ i.__str__() for i in deserialized_cmds]
+        print('run commands', cmds)
+
+        result = nr.run(napalm_cli, commands=cmds ) #["show version", "show ip int br", "show ip route"])
 
         print('COMPLETED')
     except ValueError:
@@ -37,3 +44,16 @@ def encode_complex(z):
         return z.dict()
     else:
         return z
+
+
+def hello():
+    nr = InitNornir(config_file="config.yaml")
+
+    print('run commands')
+    result = nr.run(napalm_cli, commands=["show version"]) #, "show ip int br", "show ip route"])
+    dict_result = [result[k][0].__dict__ for k, v in result.items()]
+    print(dict_result)
+    print(json.dumps(dict_result, default=encode_complex))
+
+if __name__ == "__main__":
+    hello()

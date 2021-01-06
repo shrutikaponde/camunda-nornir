@@ -8,6 +8,7 @@ from parse_report import parse_report
 from run_napalm_validate import run_napalm_validate
 from run_napalm_ping import run_napalm_ping
 from run_napalm_cli import run_napalm_cli
+from get_block import get_block
 
 if __name__ == '__main__':
     import pycamunda.processdef
@@ -23,12 +24,13 @@ if __name__ == '__main__':
 
     # exit()
     worker = worker.Worker(url=url, worker_id=worker_id)
-    # worker.subscribe(
-    #     topic='check_inventory',
-    #     func=check_inventory,
-    #     variables=['config_path']
-    # )
-    # print('Subscribed to check_inventory topic')
+
+    worker.subscribe(
+        topic='block_expression',
+        func=get_block,
+        variables=['start_expression', 'end_expression', 'result']
+    )
+    print('Subscribed to check_inventory topic')
 
     worker.subscribe(
         topic='napalm_get',

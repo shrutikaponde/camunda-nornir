@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0fbg760" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:process id="parse_result_dmn" name="Parse result with DMN" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1jfkkuj</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1jfkkuj" sourceRef="StartEvent_1" targetRef="configure_path" />
+    <bpmn:userTask id="configure_path" name="Configure YAML path">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="config_path" label="config_path" type="string" defaultValue="config.yaml" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1jfkkuj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ptoxn8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1ptoxn8" sourceRef="configure_path" targetRef="get_interface_information" />
+    <bpmn:callActivity id="get_interface_information" name="Get interface information" calledElement="show_ip_int_br_process">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ptoxn8</bpmn:incoming>
+      <bpmn:outgoing>Flow_17cbhvr</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:sequenceFlow id="Flow_17cbhvr" sourceRef="get_interface_information" targetRef="Activity_1gilwmd" />
+    <bpmn:userTask id="Activity_1gilwmd" name="Enter block expression">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="start_expression" label="start_expression" type="string" defaultValue="FastEthernet" />
+          <camunda:formField id="end_expression" label="end_expression" type="string" defaultValue=".*?[DHCP]+" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_17cbhvr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0p9dgu9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0p9dgu9" sourceRef="Activity_1gilwmd" targetRef="Activity_1nzxyxv" />
+    <bpmn:serviceTask id="Activity_1nzxyxv" name="Parse block expression" camunda:type="external" camunda:topic="block_expression">
+      <bpmn:incoming>Flow_0p9dgu9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1gtzuuh</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1gtzuuh" sourceRef="Activity_1nzxyxv" targetRef="Activity_1q817pl" />
+    <bpmn:userTask id="Activity_1q817pl" name="Decide action">
+      <bpmn:incoming>Flow_1gtzuuh</bpmn:incoming>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="parse_result_dmn">
+      <bpmndi:BPMNEdge id="Flow_1jfkkuj_di" bpmnElement="Flow_1jfkkuj">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ptoxn8_di" bpmnElement="Flow_1ptoxn8">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17cbhvr_di" bpmnElement="Flow_17cbhvr">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0p9dgu9_di" bpmnElement="Flow_0p9dgu9">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="750" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gtzuuh_di" bpmnElement="Flow_1gtzuuh">
+        <di:waypoint x="850" y="117" />
+        <di:waypoint x="910" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_155nonm_di" bpmnElement="configure_path">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0m66eev_di" bpmnElement="get_interface_information">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vrq28r_di" bpmnElement="Activity_1gilwmd">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_183319k_di" bpmnElement="Activity_1nzxyxv">
+        <dc:Bounds x="750" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1iqeb1d_di" bpmnElement="Activity_1q817pl">
+        <dc:Bounds x="910" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
