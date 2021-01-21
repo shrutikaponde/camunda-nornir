@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_07exa06" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <decision id="Decision_0ibhf2u" name="Decision 1">
+    <knowledgeRequirement id="KnowledgeRequirement_0ahmgv1">
+      <requiredKnowledge href="#BusinessKnowledgeModel_1ex0uub" />
+    </knowledgeRequirement>
+    <decisionTable id="DecisionTable_1l86372">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_1ex0uub" name="BKM" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_0ibhf2u">
+        <dc:Bounds height="80" width="180" x="400" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1xxg0rx" dmnElementRef="BusinessKnowledgeModel_1ex0uub">
+        <dc:Bounds height="46" width="135" x="153" y="167" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0rykx2u" dmnElementRef="KnowledgeRequirement_0ahmgv1">
+        <di:waypoint x="288" y="179" />
+        <di:waypoint x="400" y="160" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

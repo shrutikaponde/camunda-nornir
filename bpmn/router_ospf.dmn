@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0yk6mj7" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <decision id="decide_crypt_auth_enabled" name="Decision 1">
+    <informationRequirement id="InformationRequirement_12584j2">
+      <requiredInput href="#commands_output" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0fzu9gm" hitPolicy="COLLECT" biodi:annotationsWidth="434">
+      <input id="Input_1" label="Configuration" biodi:width="291" camunda:inputVariable="commands_output.show_run">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>commands_output.show_run</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0kvdch1" label="OSPF interface blocks" biodi:width="346" camunda:inputVariable="conditions.condition_2.block_expressions">
+        <inputExpression id="LiteralExpression_0my6bay" typeRef="string">
+          <text>conditions.condition_2.block_expressions</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="action" typeRef="string" biodi:width="606" />
+      <rule id="DecisionRule_00f3hlp">
+        <inputEntry id="UnaryTests_0q4b95l">
+          <text>not(contains(commands_output.show_run, "router ospf"))</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00iyglr">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_174mtpa">
+          <text>"do_not_raise"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_09aawf5">
+        <inputEntry id="UnaryTests_18n5m2b">
+          <text>contains(commands_output.show_run, "router ospf")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jsy8c6">
+          <text>count(conditions.condition_2.block_expressions) &lt; 1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wzy0ej">
+          <text>"This device do not contains any OSPF peers"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qk438w">
+        <inputEntry id="UnaryTests_1tvlw26">
+          <text>contains(commands_output.show_run, "router ospf")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bh8o4y">
+          <text>count(conditions.condition_2.block_expressions) &gt; 1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_132suhc">
+          <text>for n in conditions.condition_2.block_expressions return if contains(n.block, "Cryptographic authentication enabled") then "This device has OSPF authenticaiton enabled for all interfaces with OSPF peers." else concatenate( "Interface ", n.groups[1] , "does not have OSPF authentication enabled.")</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="commands_output" name="All commands output" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="decide_crypt_auth_enabled">
+        <dc:Bounds height="80" width="180" x="330" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_139d87j" dmnElementRef="commands_output">
+        <dc:Bounds height="45" width="125" x="157" y="97" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1bqj130" dmnElementRef="InformationRequirement_12584j2">
+        <di:waypoint x="282" y="120" />
+        <di:waypoint x="310" y="120" />
+        <di:waypoint x="330" y="120" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

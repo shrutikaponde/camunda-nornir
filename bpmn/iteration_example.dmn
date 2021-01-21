@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1x4g1fr" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <decision id="decideDrink" name="Decide Drink">
+    <informationRequirement id="InformationRequirement_0jijgbq">
+      <requiredInput href="#eventDetails" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1rwiaag" hitPolicy="COLLECT">
+      <input id="Input_1" label="Guest Name" biodi:width="316" camunda:inputVariable="eventDetails">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_16e20wx" label="Time" camunda:inputVariable="time">
+        <inputExpression id="LiteralExpression_0icw172" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1otxp0v">
+          <text>"morning","evening","afternoon","night"</text>
+        </inputValues>
+      </input>
+      <output id="Output_1" label="Drink" name="drink" typeRef="string" />
+      <rule id="DecisionRule_0jyprho">
+        <inputEntry id="UnaryTests_0z043vt">
+          <text>list contains(eventDetails.guestList, "shrutika")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0b2zjri">
+          <text>"morning","afternoon"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xnx89y">
+          <text>"Damn fine sugarless coffee"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0oyymgm">
+        <inputEntry id="UnaryTests_1wwj2pa">
+          <text>list contains(eventDetails.guestList, "vishal")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mtnfsx">
+          <text>"morning","afternoon"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ohlcu4">
+          <text>"Tea + Tea"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06lul7y">
+        <inputEntry id="UnaryTests_0pij9og">
+          <text>list contains(eventDetails.guestList, "shrutika")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pq6j0p">
+          <text>"evening"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13gun5z">
+          <text>"Black coffee"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0hdq1iy">
+        <inputEntry id="UnaryTests_1oa6ggr">
+          <text>count(eventDetails.guestList) &lt; 1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0553iqm">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04vmnfg">
+          <text>"No one to serve ;{"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_175f8vu">
+        <inputEntry id="UnaryTests_0e871zi">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08n3r5x">
+          <text>"night"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1odvhzl">
+          <text>"Milk"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="eventDetails" name="EventDetails" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="decideDrink">
+        <dc:Bounds height="80" width="180" x="500" y="160" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0pjsnj7" dmnElementRef="eventDetails">
+        <dc:Bounds height="45" width="125" x="507" y="287" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1d0m68y" dmnElementRef="InformationRequirement_0jijgbq">
+        <di:waypoint x="570" y="287" />
+        <di:waypoint x="590" y="260" />
+        <di:waypoint x="590" y="240" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

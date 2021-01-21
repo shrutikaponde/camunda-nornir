@@ -2,7 +2,7 @@
 r1:
     hostname: 192.168.254.128
     port: 5012
-    username: 
+    username: cisco
     password: cisco
     platform: ios
     groups:
@@ -16,7 +16,7 @@ r1:
             extras:
                 optional_args: {
                     transport: 'telnet', 
-                    # global_delay_factor: 2,
+                    global_delay_factor: 2,
                     secret: 'cisco',
                     # dest_file_system: 'ios' # required for napalm_configure
                     }

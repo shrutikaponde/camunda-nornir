@@ -1,0 +1,7 @@
+++++++++++++++++++ RAW STRING OUTPUT (napalm cli - show ip route) ++++++++++++++++++
+
+{"show ip route": "Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\n       E1 - OSPF external type 1, E2 - OSPF external type 2\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\n       o - ODR, P - periodic downloaded static route\n\nGateway of last resort is 192.168.122.1 to network 0.0.0.0\n\nC    192.168.122.0/24 is directly connected, FastEthernet0/0\n     10.0.0.0/24 is subnetted, 1 subnets\nC       10.1.1.0 is directly connected, FastEthernet0/1\nS    192.168.1.0/24 [1/0] via 10.1.1.1\nS*   0.0.0.0/0 [254/0] via 192.168.122.1"}
+
+++++++++++++++++++ STRUCTURED OUTPUT (napalm get - route_to ) ++++++++++++++++++
+
+{"route_to": {"192.168.122.0/24": [{"protocol": "connected", "outgoing_interface": "FastEthernet0/0", "age": "", "current_active": true, "routing_table": "default", "last_active": true, "protocol_attributes": {}, "next_hop": "", "selected_next_hop": true, "inactive_reason": "", "preference": 0}]}}

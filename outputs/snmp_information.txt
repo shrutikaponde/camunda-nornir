@@ -1,0 +1,6 @@
+++++++++++++++++++ RAW STRING OUTPUT (napalm cli - show snmp users) ++++++++++++++++++
+
+{"show snmp user": "User name: user1\nEngine ID: 800000090300C40306FB0000\nstorage-type: nonvolatile\t active\nAuthentication Protocol: MD5\nPrivacy Protocol: None\nGroup-name: group1"}
+
+++++++++++++++++++ STRUCTURED OUTPUT (napalm get - NOT FOUND GET METHOD) ++++++++++++++++++ 
+

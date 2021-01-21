@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="test_expression" name="Test Expression" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <decision id="Decision_0d1db7t" name="Decide string type">
+    <informationRequirement id="InformationRequirement_0t5jnh0">
+      <requiredDecision href="#decideAction" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1es9rxb">
+      <input id="Input_1" camunda:inputVariable="test_string">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>test_string</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="string_type" typeRef="string" />
+      <rule id="DecisionRule_13znf6t">
+        <inputEntry id="UnaryTests_1smgsk1">
+          <text>string length(test_string) &lt; 4</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1m1rpil">
+          <text>"short"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ygzxlx">
+        <inputEntry id="UnaryTests_0n9akbs">
+          <text>string length(test_string) &gt; 4</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1n3qp0c">
+          <text>"long"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Decision_1jy8t9l" name="Decide string starts with">
+    <decisionTable id="DecisionTable_0x6aks0">
+      <input id="InputClause_1vdv64g" camunda:inputVariable="test_string">
+        <inputExpression id="LiteralExpression_0se96lt" typeRef="string">
+          <text>test_string</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0qtq5km" name="output" typeRef="boolean" />
+      <rule id="DecisionRule_0u5mlam">
+        <inputEntry id="UnaryTests_1loco3w">
+          <text>starts with(test_string, "h") = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_06wv61l">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0rsmy30" name="name" />
+  <inputData id="InputData_0zdwpat" name="configuration" />
+  <decision id="decideAction" name="Decide Action">
+    <informationRequirement id="InformationRequirement_0vemwl1">
+      <requiredInput href="#InputData_0rsmy30" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_03jz8w5">
+      <requiredInput href="#InputData_0zdwpat" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_12gvko2">
+      <requiredInput href="#InputData_0c2l56r" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_04e3mh2" hitPolicy="FIRST">
+      <input id="InputClause_11q7v2c" camunda:inputVariable="name">
+        <inputExpression id="LiteralExpression_1bnjao8" typeRef="string" expressionLanguage="feel">
+          <text>name</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_00731vk" camunda:inputVariable="configuration">
+        <inputExpression id="LiteralExpression_12w7w4n" typeRef="string">
+          <text>configuration</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0mi98q1" name="action" typeRef="string" />
+      <rule id="DecisionRule_0kvl0e2">
+        <inputEntry id="UnaryTests_03f6hmp">
+          <text>"cisco_ios_router"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dsm2im">
+          <text>contains(configuration, "ip options drop")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1eovh0f">
+          <text>"Do not raise violation"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1kk02w4">
+        <inputEntry id="UnaryTests_0k8gh8u">
+          <text>"cisco_ios_switch"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0em6nrw">
+          <text>contains(configuration, "ip options drop")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nwpqdu">
+          <text>"Do not raise violation"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ufyvc7">
+        <inputEntry id="UnaryTests_1sbxlsx">
+          <text>device_name</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1z00c0p">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15613kw">
+          <text>"I am accessible"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0corq60">
+        <inputEntry id="UnaryTests_12n8zbf">
+          <text>not("cisco_ios_router", "cisco_ios_switch")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0roxx81">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0k6w1q4">
+          <text>"raise violation"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0c2l56r" name="device_name" />
+  <textAnnotation id="TextAnnotation_1ydyqwn">
+    <text>switch or router host name extracted from device or database</text>
+  </textAnnotation>
+  <association id="Association_1tfkfyb">
+    <sourceRef href="#TextAnnotation_1ydyqwn" />
+    <targetRef href="#InputData_0rsmy30" />
+  </association>
+  <textAnnotation id="TextAnnotation_0a964am">
+    <text>device configuration</text>
+  </textAnnotation>
+  <association id="Association_1u4fct0">
+    <sourceRef href="#TextAnnotation_0a964am" />
+    <targetRef href="#InputData_0zdwpat" />
+  </association>
+  <textAnnotation id="TextAnnotation_13l7c5n">
+    <text>CISC-RT-000750 - Provider Edge (PE) switch must ignore or drop all packets with any IP options</text>
+  </textAnnotation>
+  <association id="Association_0vffkaj">
+    <sourceRef href="#TextAnnotation_13l7c5n" />
+    <targetRef href="#decideAction" />
+  </association>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_0d1db7t">
+        <dc:Bounds height="80" width="180" x="670" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1v9adsn" dmnElementRef="Decision_1jy8t9l">
+        <dc:Bounds height="80" width="180" x="150" y="160" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_11ivlti" dmnElementRef="InputData_0rsmy30">
+        <dc:Bounds height="45" width="125" x="597" y="457" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_033k26t" dmnElementRef="InformationRequirement_0vemwl1">
+        <di:waypoint x="660" y="457" />
+        <di:waypoint x="730" y="380" />
+        <di:waypoint x="730" y="360" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0smbswk" dmnElementRef="InputData_0zdwpat">
+        <dc:Bounds height="45" width="125" x="807" y="457" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1fnwsa4" dmnElementRef="InformationRequirement_03jz8w5">
+        <di:waypoint x="870" y="457" />
+        <di:waypoint x="790" y="380" />
+        <di:waypoint x="790" y="360" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0wmw3d4" dmnElementRef="decideAction">
+        <dc:Bounds height="80" width="180" x="670" y="280" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0ezlhlo" dmnElementRef="InputData_0c2l56r">
+        <dc:Bounds height="45" width="125" x="447" y="297" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1lpm3g1" dmnElementRef="InformationRequirement_12gvko2">
+        <di:waypoint x="572" y="320" />
+        <di:waypoint x="650" y="320" />
+        <di:waypoint x="670" y="320" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0gm0qab" dmnElementRef="TextAnnotation_1ydyqwn">
+        <dc:Bounds height="50" width="162" x="729" y="535" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0d8dozs" dmnElementRef="Association_1tfkfyb">
+        <di:waypoint x="729" y="535" />
+        <di:waypoint x="688" y="502" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0764vqh" dmnElementRef="TextAnnotation_0a964am">
+        <dc:Bounds height="40" width="100" x="960" y="520" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1hll3kv" dmnElementRef="Association_1u4fct0">
+        <di:waypoint x="960" y="531" />
+        <di:waypoint x="909" y="502" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1xdkmfg" dmnElementRef="TextAnnotation_13l7c5n">
+        <dc:Bounds height="62" width="270" x="890" y="280" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0z34b25" dmnElementRef="Association_0vffkaj">
+        <di:waypoint x="890" y="320" />
+        <di:waypoint x="850" y="320" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_11v9lu1" dmnElementRef="InformationRequirement_0t5jnh0">
+        <di:waypoint x="760" y="280" />
+        <di:waypoint x="760" y="180" />
+        <di:waypoint x="760" y="160" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
